@@ -57,10 +57,10 @@ public class UserService implements UserDetailsService {
 
         User user = repository.findByEmail(email);
         if(user == null) {
-            LOGGER.warn("Usuário não encontrado " + email);
+            LOGGER.error("Usuário não encontrado: " + email);
             throw new UsernameNotFoundException("Usuário não encontrado");
         }
-        LOGGER.info("Usuário encontrado " + email);
+        LOGGER.info("Usuário encontrado: " + email);
         return user;
     }
 }
