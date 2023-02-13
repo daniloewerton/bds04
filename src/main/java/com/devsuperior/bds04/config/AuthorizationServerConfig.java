@@ -2,7 +2,6 @@ package com.devsuperior.bds04.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,9 +38,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Value("${jwt.duration}")
     private Integer jwtDuration;
 
-    @Value("${jwt.secret}")
-    private String jwtSecret;
-
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) {
         security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
@@ -62,17 +58,5 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         endpoints.authenticationManager(authenticationManager)
                 .tokenStore(tokenStore)
                 .accessTokenConverter(accessTokenConverter);
-    }
-
-    @Bean
-    public JwtAccessTokenConverter accessTokenConverter() {
-        JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
-        tokenConverter.setSigningKey("MY-JWT-SECRET");
-        return tokenConverter;
-    }
-
-    @Bean
-    public JwtTokenStore tokenStore() {
-        return new JwtTokenStore(accessTokenConverter());
     }
 }
