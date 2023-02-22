@@ -1,14 +1,7 @@
 package com.devsuperior.bds04.entities;
 
+import javax.persistence.*;
 import java.time.LocalDate;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_event")
@@ -27,6 +20,13 @@ public class Event {
 	
 	public Event() {
 	}
+
+//	public Event(EventDTO dto) {
+//		id = dto.getId();
+//		name = dto.getName();
+//		date = dto.getDate();
+//		url = dto.getUrl();
+//	}
 
 	public Event(Long id, String name, LocalDate date, String url, City city) {
 		this.id = id;
